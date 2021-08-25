@@ -1,4 +1,4 @@
-# truth-table-maker
+# truth-table-generator
 
 ## Netlify Page
 https://truth-table.netlify.app
