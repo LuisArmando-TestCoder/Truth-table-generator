@@ -134,7 +134,6 @@ td, td::before {
 }
 
 tr td:hover {
-    transform: scale(1.1);
     background: #ddd;
 }
 
