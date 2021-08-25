@@ -1,26 +1,65 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <main>
+    <p>
+      You can type any proposition like the following
+      <pre>{{defaultProposition}}</pre>
+    </p>
+    <truth-table-maker :defaultProposition="defaultProposition"/>
+    <address>
+      Coded by Luis Armando Murillo Baltodano.
+      <br/>
+      <a href="https://testcoder.netlify.app/">
+        Author's website
+      </a>
+      <br/>
+      Alajuela, Grecia
+      <br/>
+      Costa Rica
+    </address>
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TruthTableMaker from './components/TruthTableMaker/index.vue'
+
+const defaultProposition = '(((E o F) > I) y (L o M)) > N'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    TruthTableMaker
+  },
+  data() {
+    return {
+      defaultProposition,
+    }
   }
 }
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+:root {
+  --spacing: 25px;
+  --shadow: #eee;
+}
+body {
+  background: #f8f8f8;
+  margin: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: var(--spacing);
+}
+
+address, a, p {
+  display: block;
+  padding: var(--spacing) 0;
 }
 </style>
