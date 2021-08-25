@@ -115,6 +115,8 @@ th, table {
 
 td {
     border-width: 0 0 1px;
+    box-shadow: 0 0 0 0;
+    transition: 0.15s;
 }
 
 tr:first-child {
@@ -128,27 +130,9 @@ tr:hover td {
     background: var(--shadow);
 }
 
-td, td::before {
-    box-shadow: 0 0 0 0;
-    transition: 0.15s;
-}
-
 tr td:hover {
     background: #ddd;
-}
-
-td:hover, td:hover::before {
     transition: 0.3s;
-}
-
-td:hover::before {
-    content: '';
-    width: 100%;
-    height: 100%;
-    box-shadow: 0 5px 10px -10px #000;
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
 input {
