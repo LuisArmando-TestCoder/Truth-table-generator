@@ -15,7 +15,8 @@
     <input type="text" @input="event => {
         updateTable(event.target.value)
     }"/>
-    <table>
+    <button @click="copyToClipboard">Copiar contenido de tabla</button>
+    <table ref="table">
         <tr>
             <th v-for="
                     key of Object.keys(table)
@@ -48,6 +49,7 @@
 
 <script>
 import getTruthTable, {logicConnectors} from './getTruthTable'
+import copyToClipboard from './copyToClipboard'
 
 export default {
     name: 'truth-table',
@@ -66,6 +68,9 @@ export default {
         }
     },
     methods: {
+        copyToClipboard() {
+            copyToClipboard(this.$refs.table)
+        },
         setPassingIndex(keyIndex) {
             this.passingIndex = keyIndex
         },
@@ -161,5 +166,15 @@ input {
 
 input:hover, input:focus {
     background: var(--shadow);
+}
+
+button {
+    margin: 0 25px;
+    border: 0;
+    padding: 15px 20px;
+    border-radius: 5px;
+    background: #111;
+    color: #eee;
+    cursor: pointer;
 }
 </style>
