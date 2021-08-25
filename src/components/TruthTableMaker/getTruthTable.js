@@ -7,6 +7,10 @@ export const logicConnectors = {
 }
 const logicKeys = Object.keys(logicConnectors).join('')
 
+// To support variable negated variables
+const maximumSingleExpressionLength = 2
+// Extract A from !A and set negated dependant
+
 function getSplitProposition(proposition) {
     const searchResults = /\((.*)\)/g.exec(proposition)
     const mainResult = searchResults[searchResults.length - 1]
@@ -56,11 +60,11 @@ function getLogicAnswer(proposition) {
 }
 
 function getIndependents(groups) {
-    return groups.filter(element => element.length === 1)
+    return groups.filter(element => element.length <= maximumSingleExpressionLength)
 }
 
 function getDependents(groups) {
-    return groups.filter(element => element.length > 1).sort(
+    return groups.filter(element => element.length > maximumSingleExpressionLength).sort(
         (a, b) => a.length - b.length
     )
 }
@@ -73,9 +77,11 @@ function getBinariesTable(independents) {
             table[independents[x]] = []
         }
 
-        for (let y = 0; y < 2 ** independents.length; y++) {
+        const base = 2
+
+        for (let y = 0; y < base ** independents.length; y++) {
             table[independents[x]].push(
-                ((y / (2 ** x)) % 2) << 0
+                ((y / (base ** x)) % base) << 0
             )
         }
     }
@@ -103,6 +109,18 @@ function getReplacedLogicProposition(
     return newProposition // '0 ˅ 1'
 }
 
+function getTableDependantReplacements({table, dependent, index}) {
+    return Object.fromEntries(
+        Object.keys(table)
+        .filter(temporalProposition => temporalProposition !== dependent)
+        .map(temporalProposition => [
+            temporalProposition.length > maximumSingleExpressionLength ?
+                `(${temporalProposition})` : temporalProposition,
+            table[temporalProposition][index]
+        ])
+    )
+}
+
 export default function getTable(proposition) {
     const groups = getGroups(`(${proposition})`)
     const independents = getIndependents(groups)
@@ -118,14 +136,7 @@ export default function getTable(proposition) {
             index < table[independent].length;
             index++
         ) {
-            const replacements = Object.fromEntries(
-            Object.keys(table)
-            .filter(temporalProposition => temporalProposition !== dependent)
-            .map(temporalProposition => [
-                temporalProposition.length > 1 ? `(${temporalProposition})` : temporalProposition,
-                table[temporalProposition][index]
-            ])
-            )
+            const replacements = getTableDependantReplacements({table, dependent, index})
             const factualProposition = getReplacedLogicProposition(dependent, replacements)
             const logicAnswer = getLogicAnswer(factualProposition)
 
