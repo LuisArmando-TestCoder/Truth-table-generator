@@ -138,7 +138,6 @@ tr td:hover {
 }
 
 td:hover, td:hover::before {
-    border-radius: 5px;
     transition: 0.3s;
 }
 
