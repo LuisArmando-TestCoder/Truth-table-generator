@@ -1,6 +1,8 @@
 export const logicConnectors = {
     'o': (x, y) => x || y,
     'y': (x, y) => x && y,
+    '#': (x, y) => x ^ y,
+    '%': (x, y) => !(x ^ y),
     '>': (x, y) => x == false || y,
 }
 const logicKeys = Object.keys(logicConnectors).join('')

@@ -1,15 +1,26 @@
 <template>
   <main>
+    <h1>Generador de tablas de verdad</h1>
+    <h4>
+      Esta herramienta fue creada por Luis Armando Murillo Baltodano
+      para automatizar una tarea de un proyecto de matemáticas discretas
+    </h4>
     <p>
-      You can type any proposition like the following
+        Puede escribir cualquier proposición como la siguiente
       <pre>{{defaultProposition}}</pre>
     </p>
     <truth-table-maker :defaultProposition="defaultProposition"/>
+    <p>
+      El código de este proyecto se puede encontrar en el siguiente repositorio
+      <a href="https://github.com/LuisArmando-TestCoder/Truth-table-generator">
+        LuisArmando-TestCoder/Truth-table-generator
+      </a>
+    </p>
     <address>
-      Coded by Luis Armando Murillo Baltodano.
+      Programado por Luis Armando Murillo Baltodano.
       <br/>
       <a href="https://testcoder.netlify.app/">
-        Author's website
+        Sitio web del autor
       </a>
       <br/>
       Alajuela, Grecia
@@ -44,6 +55,9 @@ export default {
 :root {
   --spacing: 25px;
   --shadow: #eee;
+}
+p, h4 {
+  max-width: 360px;
 }
 body {
   background: #f8f8f8;

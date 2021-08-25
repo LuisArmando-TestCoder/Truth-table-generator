@@ -1,5 +1,8 @@
 # truth-table-maker
 
+## Netlify Page
+https://truth-table.netlify.app
+
 ## Project setup
 ```
 npm install

@@ -1,6 +1,6 @@
 <template>
     <header>
-        <h3>Logic Connectors available</h3>
+        <h3>Conectores lógicos disponibles</h3>
         <pre>{{
             JSON.stringify(
                 Object.fromEntries(
