@@ -74,9 +74,24 @@ export default {
         setPassingIndex(keyIndex) {
             this.passingIndex = keyIndex
         },
+        getPrintableTable(truthTable) {
+            const printableTable = []
+
+            Object.values(truthTable)[0].forEach((_, index) => {
+                const tableRow = Object.fromEntries(
+                    Object.keys(truthTable).map(key => [key, truthTable[key][index]])
+                )
+
+                printableTable.push(tableRow)
+            })
+
+            return printableTable
+        },
         updateTable(value) {
             try {
                 const truthTable = getTruthTable(value || this.proposition)
+
+                console.table(this.getPrintableTable(truthTable))
 
                 this.table = truthTable
             } catch {
